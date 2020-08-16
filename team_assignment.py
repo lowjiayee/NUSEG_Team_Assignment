@@ -12,8 +12,9 @@ def main():
 def parse_msg():
   print('Parsing Message...')
 
-  f = open('msg.csv', 'r')
-  return f.readlines()
+  with open('msg.csv', 'r') as f:
+    lines = f.readlines()
+  return lines
 
 # Details in format ["name, time-time", "name, time-time"]
 def generate_timeslots(details):
@@ -67,10 +68,9 @@ def calculate_num_teams(players):
 def export_teams(player_teams):
   print('Exporting Teams...')
 
-  f = open('teams.csv', 'w')
-  f.write(u'username, timeslot, team\n')
-  for player in player_teams:
-    f.write(', '.join(player) + "\n")
-  f.close()
+  with open('teams.csv', 'w') as f:
+    f.write(u'username, timeslot, team\n')
+    for player in player_teams:
+      f.write(', '.join(player) + "\n")
 
 main()
